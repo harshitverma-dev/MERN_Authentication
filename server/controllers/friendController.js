@@ -56,14 +56,14 @@ const postFriend = async (req, res) => {
         if (!firstName || !lastName || !friendEmail || !jobRole || !location) {
             return res.status(404).json({
                 status: "failed",
-                message: "fill all fields !"
+                message: "Fill all fields !"
             })
         }
         const checkfriend = await Friend.findOne({ friendEmail: friendEmail });
         if (checkfriend) {
             return res.status(404).json({
                 status: "failed",
-                message: "this friend's email is exsist already"
+                message: "This friend's email is exsist already !"
             })
         }
         const saveFriend = await new Friend({
@@ -71,8 +71,9 @@ const postFriend = async (req, res) => {
         })
         const storeFriend = await saveFriend.save();
         res.status(200).json({
-            status: "sucess",
-            message: "friend saved in DB"
+            status: "success",
+            message: "friend saved successfully in DB !",
+            storeFriend
         })
     } catch (err) {
         res.status(404).json({
