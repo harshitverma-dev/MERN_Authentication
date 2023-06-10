@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import Friends from '../components/Friends';
 import { Col, Container, Row } from 'react-bootstrap';
+import { FriendsContext } from '../context/context';
 import FriendsForm from '../components/FriendsForm';
 
 const Home = () => {
-    const [friends, setFriends] = useState();
+    // const [friends, setFriends] = useState();
+    const { state, dispatch } = useContext(FriendsContext);
+    // console.log(state)
     useEffect(() => {
         axios.get('http://localhost:1000/api/friends')
             .then((res) => {
                 if (res.status === 200) {
-                    setFriends(res.data.allFriends);
+                    dispatch({
+                        type:'SET_FRIENDS',
+                        payload: res.data.allFriends
+                    })
+                    // setFriends(res.data.allFriends);
                 }
             }).catch(err => {
                 console.log(err)
@@ -22,7 +29,7 @@ const Home = () => {
                 <Col lg={8}>
                     <Row xs={1} md={2}>
                         {
-                            friends?.map((friends) => {
+                            state?.friends?.map((friends) => {
                                 return <Friends key={friends._id} friends={friends} />
                             })
                         }

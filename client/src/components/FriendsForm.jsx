@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Form, Button, Alert, Card } from 'react-bootstrap';
 import axios from 'axios'
+import { FriendsContext } from '../context/context';
 
 const FriendsForm = () => {
+    const { dispatch } = useContext(FriendsContext)
     const [friendsData, setFriendsData] = useState({
         firstName: "",
         lastName: "",
@@ -38,6 +40,10 @@ const FriendsForm = () => {
                 console.log(res)
                 if (res.data.status === "success") {
                     setSavedFriendData(res.data.storeFriend);
+                    dispatch({
+                        type:'CREATE_FRIENDS',
+                        payload: res.data.storeFriend
+                    })
                     setFriendsData({
                         firstName: "",
                         lastName: "",
@@ -50,7 +56,7 @@ const FriendsForm = () => {
                         setFriendSavedMsg('')
                     }, 5000)
                 }
-                
+
             }).catch(err => {
                 console.log(err)
                 setUserExistMsg(err.response.data.message)
@@ -117,7 +123,7 @@ const FriendsForm = () => {
                             placeholder="Enter location"
                             onChange={onChangeFun} />
                     </Form.Group>
-                    <Button onLoad={true} variant="primary" type="submit" onClick={submitFriendsData} disabled={friendsData.firstName && friendsData.lastName && friendsData.friendEmail && friendsData.jobRole && friendsData.location ? false : true}>
+                    <Button variant="primary" type="submit" onClick={submitFriendsData} disabled={friendsData.firstName && friendsData.lastName && friendsData.friendEmail && friendsData.jobRole && friendsData.location ? false : true}>
                         Submit
                     </Button>
                 </Form>

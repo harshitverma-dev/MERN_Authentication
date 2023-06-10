@@ -30,3 +30,8 @@
 .bg-color{
     background-color: #f8f8f8;
 }
+
+.danger-color{
+    color: red;
+    cursor: pointer;
+}
