@@ -49,7 +49,7 @@ const Friends = ({ friends }) => {
                         <ListGroup.Item>
                             <strong>Location :- </strong> {friends.location}
                         </ListGroup.Item>
-                        <ListGroupItem className='text-end'>
+                        <ListGroupItem className='text-end date-color'>
                             {formatDistanceToNow(new Date(friends.createdAt), { addSuffix: true })}
                         </ListGroupItem>
                     </ListGroup>
