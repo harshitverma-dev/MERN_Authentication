@@ -85,6 +85,7 @@ const FriendsForm = () => {
                             type="text"
                             name='firstName'
                             placeholder="Enter first name"
+                            value={friendsData.firstName}
                             onChange={onChangeFun} />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicLastName">
@@ -93,6 +94,7 @@ const FriendsForm = () => {
                             type="text"
                             name='lastName'
                             placeholder="Enter last name"
+                            value={friendsData.lastName}
                             onChange={onChangeFun} />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -101,6 +103,7 @@ const FriendsForm = () => {
                             type="email"
                             name='friendEmail'
                             placeholder="Enter email"
+                            value={friendsData.friendEmail}
                             onChange={onChangeFun} />
                         <Form.Text className="text-muted">
                             We'll never share your email with anyone else.
@@ -113,6 +116,7 @@ const FriendsForm = () => {
                             type="text"
                             name='jobRole'
                             placeholder="Enter job role"
+                            value={friendsData.jobRole}
                             onChange={onChangeFun} />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicLocation">
@@ -121,6 +125,7 @@ const FriendsForm = () => {
                             type="text"
                             name='location'
                             placeholder="Enter location"
+                            value={friendsData.location}
                             onChange={onChangeFun} />
                     </Form.Group>
                     <Button variant="primary" type="submit" onClick={submitFriendsData} disabled={friendsData.firstName && friendsData.lastName && friendsData.friendEmail && friendsData.jobRole && friendsData.location ? false : true}>

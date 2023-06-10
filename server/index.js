@@ -16,9 +16,9 @@ app.use(morgan('dev'));
 app.use('/api/friends', friendRoutes);
 
 
-app.get('/', (req, res) => {
-    res.send('hello, from server side');
-})
+// app.get('/', (req, res) => {
+//     res.send('hello, from server side');
+// })
 
 app.listen(PORT, () => {
     console.log(`app is running on ${PORT} port`);

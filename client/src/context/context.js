@@ -12,6 +12,10 @@ export const reducers = (state, action) => {
             return {
                 friends: [action.payload, ...state.friends]
             }
+        case 'DELETE_FRIENDS':
+            return {
+                friends: state.friends.filter(items => items._id !== action.payload._id)
+            }
         default:
             return state;
     }

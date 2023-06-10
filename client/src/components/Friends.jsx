@@ -1,14 +1,29 @@
-import React, { useState } from 'react'
-import { Card, Col, Row, ListGroup, Modal, Button, Alert  } from 'react-bootstrap';
+import React, { useContext, useState } from 'react'
+import { Card, Col, Row, ListGroup, Modal, Button, Alert, ListGroupItem } from 'react-bootstrap';
+import axios from 'axios'
+import { FriendsContext } from '../context/context';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const Friends = ({ friends }) => {
     // console.log(friends._id)
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const { dispatch } = useContext(FriendsContext)
+
     const friendDeleteFun = () => {
-        // axios.post()
-        console.log(friends._id)
+        axios.delete(`http://localhost:1000/api/friends/${friends._id}`)
+            .then(res => {
+                console.log(res);
+                setShow(false)
+                dispatch({
+                    type: 'DELETE_FRIENDS',
+                    payload: res.data.deleteFriend
+                })
+
+            })
+            .catch(err => console.log(err));
+        // console.log(friends._id)
     }
     return (
         <>
@@ -34,6 +49,9 @@ const Friends = ({ friends }) => {
                         <ListGroup.Item>
                             <strong>Location :- </strong> {friends.location}
                         </ListGroup.Item>
+                        <ListGroupItem className='text-end'>
+                            {formatDistanceToNow(new Date(friends.createdAt), { addSuffix: true })}
+                        </ListGroupItem>
                     </ListGroup>
                 </Card>
             </Col>
@@ -43,8 +61,8 @@ const Friends = ({ friends }) => {
                 </Modal.Header>
                 <Modal.Body>
                     <Alert variant={'danger'}>
-                    Do you want to delete your friend ? 
-                    if yes then click on the yes button otherwise click on close button.
+                        Do you want to delete your friend ?
+                        if yes then click on the yes button otherwise click on close button.
                     </Alert>
                 </Modal.Body>
                 <Modal.Footer>
