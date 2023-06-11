@@ -2,9 +2,11 @@ import React, { useContext, useState } from 'react'
 import { Form, Button, Alert, Card } from 'react-bootstrap';
 import axios from 'axios'
 import { FriendsContext } from '../context/context';
+import { AuthUser } from '../context/authContext';
 
 const FriendsForm = () => {
     const { dispatch } = useContext(FriendsContext)
+    const { authstate } = useContext(AuthUser);
     const [friendsData, setFriendsData] = useState({
         firstName: "",
         lastName: "",
@@ -35,13 +37,17 @@ const FriendsForm = () => {
                 setFieldsError('')
             }, 7000)
         }
-        axios.post('http://localhost:1000/api/friends', friendsData)
+        axios.post('http://localhost:1000/api/friends', friendsData, {
+            headers: {
+                'Authorization': `Bearer ${authstate?.user?.token}`
+            }
+        })
             .then(res => {
                 console.log(res)
                 if (res.data.status === "success") {
                     setSavedFriendData(res.data.storeFriend);
                     dispatch({
-                        type:'CREATE_FRIENDS',
+                        type: 'CREATE_FRIENDS',
                         payload: res.data.storeFriend
                     })
                     setFriendsData({

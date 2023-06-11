@@ -3,6 +3,7 @@ import { Card, Col, Row, ListGroup, Modal, Button, Alert, ListGroupItem } from '
 import axios from 'axios'
 import { FriendsContext } from '../context/context';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { AuthUser } from '../context/authContext';
 
 const Friends = ({ friends }) => {
     // console.log(friends._id)
@@ -10,9 +11,14 @@ const Friends = ({ friends }) => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const { dispatch } = useContext(FriendsContext)
+    const { authstate } = useContext(AuthUser);
 
     const friendDeleteFun = () => {
-        axios.delete(`http://localhost:1000/api/friends/${friends._id}`)
+        axios.delete(`http://localhost:1000/api/friends/${friends._id}`, {
+            headers: {
+                'Authorization': `Bearer ${authstate?.user?.token}`
+            }
+        })
             .then(res => {
                 console.log(res);
                 setShow(false)

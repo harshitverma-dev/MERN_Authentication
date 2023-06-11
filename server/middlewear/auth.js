@@ -13,6 +13,7 @@ const verifyToken = (req, res, next) => {
     // let token = authHeader.split(' ')[1];
     const token = authHeader && authHeader.split(' ')[1]
     const verified = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    console.log(verified)
     req.user = verified;
     next();
 }

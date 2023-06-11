@@ -5,7 +5,7 @@
     padding: 0;
 }
 
-body{
+body, input{
     font-family: 'Montserrat Alternates', sans-serif;
 }
 
@@ -32,8 +32,12 @@ body{
     top: 20px;
 }
 
-.bg-color {
+.bg-color, .bg-color-auth {
     background-color: #f8f8f8;
+}
+
+.bg-color-auth{
+    height: 92vh;
 }
 
 .danger-color {
@@ -43,4 +47,16 @@ body{
 
 .date-color {
     color: #777777;
+}
+.navbar-toggler {
+    background-color: #ddd;
+}
+.login-form {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.text-style:hover{
+    text-shadow: 0 0 rgb(24, 47, 222);
 }

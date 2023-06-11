@@ -4,25 +4,32 @@ import Friends from '../components/Friends';
 import { Col, Container, Row } from 'react-bootstrap';
 import { FriendsContext } from '../context/context';
 import FriendsForm from '../components/FriendsForm';
+import { AuthUser } from '../context/authContext';
 
 const Home = () => {
-    // const [friends, setFriends] = useState();
+    const { authstate } = useContext(AuthUser);
     const { state, dispatch } = useContext(FriendsContext);
-    // console.log(state)
+
     useEffect(() => {
-        axios.get('http://localhost:1000/api/friends')
-            .then((res) => {
-                if (res.status === 200) {
-                    dispatch({
-                        type:'SET_FRIENDS',
-                        payload: res.data.allFriends
-                    })
-                    // setFriends(res.data.allFriends);
+        if (authstate?.user) {
+            axios.get('http://localhost:1000/api/friends', {
+                headers: {
+                    'Authorization': `Bearer ${authstate?.user?.token}`
                 }
-            }).catch(err => {
-                console.log(err)
             })
-    }, [])
+                .then((res) => {
+                    if (res.status === 200) {
+                        dispatch({
+                            type: 'SET_FRIENDS',
+                            payload: res.data.allFriends
+                        })
+                        // setFriends(res.data.allFriends);
+                    }
+                }).catch(err => {
+                    console.log(err)
+                })
+        }
+    }, [dispatch, authstate?.user])
     return (
         <Container>
             <Row className='flex-column-reverse flex-lg-row'>
