@@ -22,7 +22,7 @@ const TopBar = () => {
                     <Nav className='mr-auto align-items-center'>
                         {
                             authstate?.user ? (
-                                <Nav.Link eventKey={2} href="#memes" className='text-dark d-flex align-items-center'>
+                                <Nav.Link eventKey={2} href="#" className='text-dark d-flex align-items-center'>
                                     <div className='d-flex flex-column'>
                                         <h6 className='mb-1'>{authstate?.user?.modifiedUser?.name ?? ''}</h6>
                                         <a className='me-3 text-decoration-none'>{authstate?.user?.modifiedUser?.email ?? ''}</a>
