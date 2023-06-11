@@ -27,7 +27,7 @@ const Signup = () => {
     const CreateUserFun = (e) => {
         e.preventDefault()
         setIsLoading(true);
-        axios.post('http://localhost:1000/api/auth/signup', userData)
+        axios.post('https://mern-auth-backend-962m.onrender.com/api/auth/signup', userData)
             .then(res => {
                 console.log(res)
                 if (res.data.message === 'success') {

@@ -12,7 +12,7 @@ const Home = () => {
 
     useEffect(() => {
         if (authstate?.user) {
-            axios.get('http://localhost:1000/api/friends', {
+            axios.get('https://mern-auth-backend-962m.onrender.com/api/friends', {
                 headers: {
                     'Authorization': `Bearer ${authstate?.user?.token}`
                 }

@@ -37,7 +37,7 @@ const FriendsForm = () => {
                 setFieldsError('')
             }, 7000)
         }
-        axios.post('http://localhost:1000/api/friends', friendsData, {
+        axios.post('https://mern-auth-backend-962m.onrender.com/api/friends', friendsData, {
             headers: {
                 'Authorization': `Bearer ${authstate?.user?.token}`
             }

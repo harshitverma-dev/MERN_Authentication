@@ -14,7 +14,7 @@ const Friends = ({ friends }) => {
     const { authstate } = useContext(AuthUser);
 
     const friendDeleteFun = () => {
-        axios.delete(`http://localhost:1000/api/friends/${friends._id}`, {
+        axios.delete(`https://mern-auth-backend-962m.onrender.com/api/friends/${friends._id}`, {
             headers: {
                 'Authorization': `Bearer ${authstate?.user?.token}`
             }

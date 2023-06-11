@@ -28,7 +28,7 @@ const Login = () => {
         e.preventDefault()
         // axios call
         setIsLoading(true);
-        axios.post('http://localhost:1000/api/auth/login', userLogin)
+        axios.post('https://mern-auth-backend-962m.onrender.com/api/auth/login', userLogin)
             .then(res => {
                 console.log(res)
                 if (res.data.status === 'success') {

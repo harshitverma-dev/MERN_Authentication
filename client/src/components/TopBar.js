@@ -46,7 +46,7 @@ const TopBar = () => {
                     </Nav>
                 </Navbar.Collapse>
             </Container>
-        </Navbar >
+        </Navbar>
     )
 }
 
